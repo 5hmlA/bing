@@ -9,12 +9,12 @@ class SnowMain extends StatefulWidget {
 }
 
 class _SnowMainState extends State<SnowMain> with SingleTickerProviderStateMixin {
-  final _snows = List.generate(200, (index) => Snow());
+  final _snows = List.generate(33, (index) => Snow());
   late AnimationController _animationControl;
 
   @override
   void initState() {
-    _animationControl = AnimationController(vsync: this, duration: Duration(seconds: 10));
+    _animationControl = AnimationController(vsync: this, duration: const Duration(seconds: 10));
     _animationControl.repeat();
     super.initState();
   }
@@ -58,16 +58,20 @@ class SnowMainPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) async {
     // Offset headCenter = size.center(Offset.zero);
-    Offset headCenter = Offset(size.width / 2, size.height - 90);
+    // Offset headCenter = Offset(size.width / 2, size.height - 90);
+    //
+    // canvas.drawCircle(headCenter, 30 * sizeFactor, snowPaint);
 
-    canvas.drawCircle(headCenter, 30 * sizeFactor, snowPaint);
+    // canvas.drawOval(
+    //     Rect.fromCenter(
+    //         center: headCenter.translate(0, 66 * sizeFactor),
+    //         width: 90 * sizeFactor,
+    //         height: 98 * sizeFactor),
+    //     snowPaint);
 
-    canvas.drawOval(Rect.fromCenter(center: headCenter.translate(0, 66 * sizeFactor), width: 90 * sizeFactor, height: 98 * sizeFactor), snowPaint);
-
-    // _snows.forEach((snow) {
-    //   snow.paint(canvas, size, snowPaint);
-    // });
-
+    _snows.forEach((snow) {
+      snow.paint(canvas, size, snowPaint);
+    });
   }
 
   @override
@@ -76,21 +80,25 @@ class SnowMainPainter extends CustomPainter {
   }
 }
 
+double velocityfun() => Random().nextInt(1).toDouble() + 1;
+
+double sizeRadiusfun() => Random().nextInt(2).toDouble() + 2;
+
 class Snow {
   double locationX = Random().nextDouble() * 1000;
-  double locationY = Random().nextDouble() * 100;
-  double velocity = Random().nextInt(6).toDouble() + 2;
+  double locationY = Random().nextDouble() * 1000;
+  double velocity = velocityfun();
 
-  double radius = Random().nextInt(6).toDouble() + 1;
+  double radius = sizeRadiusfun();
 
   void paint(Canvas canvas, Size size, Paint paint) {
     locationX += Random().nextDouble() - Random().nextDouble();
     locationY += velocity;
     if (locationY > size.height) {
       locationY = Random().nextDouble() * 10;
-      radius = Random().nextInt(6).toDouble() + 1;
-      velocity = Random().nextInt(6).toDouble() + 2;
       locationX = Random().nextInt(size.width.floor()).toDouble();
+      radius = sizeRadiusfun();
+      velocity = velocityfun();
     }
     if (locationX > size.width) {
       locationX = Random().nextInt(size.width.floor()).toDouble();
