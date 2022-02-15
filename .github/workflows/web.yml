@@ -1,5 +1,5 @@
-# 为library编译flutter web 同时发布为github page 网页源码分支为gh-page，通过 user.github.io/repo/可以访问
-name: lib web
+# 编译flutter web 同时发布为github page 网页源码分支为gh-page，通过 user.github.io/repo/可以访问
+name: flutter_web
 on:
   push:
     branches:
