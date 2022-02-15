@@ -17,7 +17,6 @@ jobs:
       - uses: subosito/flutter-action@v1
       - run: echo "💡 ${{ github.repository }} "
       - run: echo "💡 ${{github.event.repository.name}}"
-      - run: echo "💡 ${${{github.repository.name}}#*/} "
       - run: flutter pub get
       - run: flutter build web --release --base-href /${{github.event.repository.name}}/
       - run: |
