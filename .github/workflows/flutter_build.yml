@@ -51,5 +51,6 @@ jobs:
       - name: 🖥️ upload apk
         uses: actions/upload-artifact@v2.3.1
         with:
-          path: "build/app/outputs/apk/release/*.apk"
+          name: app-preview.apk
+          path: "build/app/outputs/apk/release/＊.apk"
       - run: echo "🎉 The job finish release succeed."
