@@ -53,4 +53,10 @@ jobs:
         with:
           name: app-preview.apk
           path: build/app/outputs/apk/release/
-      - run: echo "🎉 The job finish release succeed."
+      - run: echo "🎉 The job finish upload succeed."
+      - name: Publish GitHub Release Artifacts
+        uses: SierraSoftworks/gh-releases@v1.0.6
+        with: 
+          token: ${{secrets.dev_secret}}
+          overwrite: 'true'
+          files: build/app/outputs/apk/release/*
